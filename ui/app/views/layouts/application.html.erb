@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>shift</title>
+    <title>gh-ost</title>
     <%= stylesheet_link_tag    :application, media: :all %>
     <%= javascript_include_tag :application %>
     <%= csrf_meta_tags %>
@@ -20,7 +20,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
               </button>
-              <%= link_to 'shift', root_url, class: 'navbar-brand' %>
+              <%= link_to 'eventbrite', root_url, class: 'navbar-brand' %>
             </div>
             <div class="collapse navbar-collapse">
               <p class="navbar-text navbar-right">
@@ -40,7 +40,7 @@
 
       <div class="container">
         <div>
-        <% unless Rails.env == 'production' %>
+        <% unless Rails.env != 'production' %>
           <div class="alert alert-danger">
             <strong>Warning:</strong> <%= Rails.env.capitalize %> environment.
           </div>
@@ -53,7 +53,7 @@
     <footer>
       <div class="container">
         <center>
-          <p class="text-muted">&copy; <%= Time.now.year %> Shift</p>
+          <p class="text-muted">&copy; <%= Time.now.year %> Eventbrite</p>
         </center>
       </div>
     </footer>

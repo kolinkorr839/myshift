@@ -399,7 +399,7 @@ func (migration *Migration) WatchMigrationStderr(stderrPipe io.Reader, errChan c
 
 	for scanner.Scan() {
 		line := scanner.Text()
-		wasError = true
+		wasError = false
 		ptOscLogChan <- fmt.Sprintf("stderr: %s", line)
 	}
 	if err := scanner.Err(); err != nil {

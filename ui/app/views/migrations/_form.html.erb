@@ -80,7 +80,7 @@
       </div>
       <div class="col-md-7">
         <%= f.text_area :ddl_statement, class: 'form-control' %>
-        <span class="help-block">This is what online-schema-change will actually run.
+        <span class="help-block">This is what gh-ost will actually run.
           Query must be a single DDL statement. References:
           <div class="tab">
             <table>
@@ -98,10 +98,10 @@
     </div>
 
     <div class="form-group">
-      <%= f.label :pr_url, 'pr url', class: 'col-md-3 control-label' %>
+      <%= f.label :pr_url, 'jira ticket', class: 'col-md-3 control-label' %>
       <div class="col-md-7">
         <%= f.text_field :pr_url, class: 'form-control' %>
-        <span class="help-block">The link to the PR url.</span>
+        <span class="help-block">The link to the Jira ticket.</span>
       </div>
     </div>
 
@@ -125,7 +125,7 @@
           <div class="form-group">
             <div class="col-md-4">
               <%= f.label :max_threads_running, 'max threads running', class: 'control-label', rows: 2%>
-              <span class="help-block">The OSC will abort if threads running reaches this value. Default: 200 threads</span>
+              <span class="help-block">The gh-ost will abort if threads running reaches this value. Default: 200 threads</span>
             </div>
             <div class="col-md-offset-1 col-md-3">
               <%= f.number_field :max_threads_running, class: 'form-control' %>

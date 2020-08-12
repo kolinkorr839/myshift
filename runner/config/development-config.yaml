@@ -7,13 +7,13 @@ mysql_rootCA:
 mysql_defaults_file: config/my_development.cnf
 
 # config for the rest client
-rest_api: http://127.0.0.1:3000/api/v1/
+rest_api: http://0.0.0.0:9189/api/v1/
 rest_cert:
 rest_key:
 
 # general config
 log_dir: /tmp/shift/
-pt_osc_path: pt-online-schema-change
+pt_osc_path: gh-ost
 pending_drops_db:
 enable_trash: true
 log_sync_interval: 10

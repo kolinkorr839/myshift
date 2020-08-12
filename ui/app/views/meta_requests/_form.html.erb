@@ -58,7 +58,7 @@
       </div>
       <div class="col-md-7">
         <textarea id="ddl_statement" class="form-control" name="ddl_statement" rows="3"><%= @saved_state[:ddl_statement] %></textarea>
-        <span class="help-block">This is what online-schema-change will actually run.
+        <span class="help-block">This is what gh-ost will actually run.
           Query must be a single DDL statement. References:
           <div class="tab">
             <table>
@@ -76,10 +76,10 @@
     </div>
 
     <div class="form-group">
-      <label for="pr_url" class="col-md-3 control-label">pr url</label>
+      <label for="pr_url" class="col-md-3 control-label">jira ticket</label>
       <div class="col-md-7">
-        <input id="pr_url" type="text" class="form-control" name="pr_url" value="<%= @saved_state[:pr_url] %>">
-        <span class="help-block">The link to the PR url.</span>
+        <input id="pr_url" type="text" class="form-control" name="jira ticket" value="<%= @saved_state[:pr_url] %>">
+        <span class="help-block">The link to the Jira ticket.</span>
       </div>
     </div>
 
@@ -104,7 +104,7 @@
           <div class="form-group">
             <div class="col-md-4">
               <label for="max_threads_running" class="control-label">max threads running</label>
-              <span class="help-block">The OSC will abort if threads running reaches this value. Default: 200 threads</span>
+              <span class="help-block">The gh-ost will abort if threads running reaches this value. Default: 200 threads</span>
             </div>
             <div class="col-md-offset-1 col-md-3">
               <input id="max_threads_running" type="number" class="form-control" name="max_threads_running" value="<%= @saved_state[:max_threads_running] %>">
@@ -115,7 +115,7 @@
           <div class="form-group">
             <div class="col-md-4">
               <label for="max_replication_lag" class="control-label">max replication lag</label>
-              <span class="help-block">The OSC will pause until every replica's lag is less than this value. Default: 1 second</span>
+              <span class="help-block">The gh-ost will pause until every replica's lag is less than this value. Default: 1 second</span>
             </div>
             <div class="col-md-offset-1 col-md-3">
             <input id="max_replication_lag" type="number" class="form-control" name="max_replication_lag" value="<%= @saved_state[:max_replication_lag] %>">

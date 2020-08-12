@@ -928,11 +928,21 @@ func (runner *runner) generatePtOscCommand(currentMigration *migration.Migration
 
 	dsn := fmt.Sprintf("D=%s,t=%s", currentMigration.Database, currentMigration.Table)
 	commandOptions = make([]string, 0)
+    ghostOptions := append(commandOptions,
+        "--user="+runner.MysqlUser,
+        "--password="+runner.MysqlPassword,
+        "--database="+currentMigration.Database,
+        "--table="+currentMigration.Table,
+        "--alter="+alterStatement,
+        "--verbose",
+        "--allow-on-master",
+        "--initially-drop-old-table",
+        "--initially-drop-ghost-table",
+        "--switch-to-rbr")
 
 	if currentMigration.Status == migration.PrepMigrationStatus {
-		commandOptions = append(commandOptions, "--alter", alterStatement, "--dry-run",
-			"-h", currentMigration.Host, "-P", strconv.Itoa(currentMigration.Port),
-			"--defaults-file", runner.MysqlDefaultsFile, dsn)
+        commandOptions = ghostOptions
+
 	} else if currentMigration.Status == migration.RunMigrationStatus {
 		// specify config file if it is defined. Options specified via command line will overwrite
 		// ones specified in the config file
@@ -967,6 +977,10 @@ func (runner *runner) generatePtOscCommand(currentMigration *migration.Migration
 		}
 
 		commandOptions = append(commandOptions, dsn)
+
+        // Hack ghost commands
+        commandOptions = nil
+        commandOptions = append(ghostOptions, "--execute")
 	}
 	return
 }
