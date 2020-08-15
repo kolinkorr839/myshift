@@ -52,11 +52,11 @@
 <hr>
 
 <% if action_type == :create %>
-  <% field_list = %w(id requestor created_at updated_at cluster_name database table ddl_statement jira_link final_insert
-       approved_by approved_at) %>
+  <% field_list = %w(id meta_request_id requestor created_at updated_at cluster_name database table ddl_statement jira_link final_insert
+       approved_by approved_at cluster_owners) %>
 <% elsif action_type == :drop %>
-  <% field_list = %w(id requestor created_at updated_at cluster_name database table ddl_statement jira_link final_insert
-       table_rows_start table_size_start index_size_start approved_by approved_at) %>
+  <% field_list = %w(id meta_request_id requestor created_at updated_at cluster_name database table ddl_statement jira_link final_insert
+       table_rows_start table_size_start index_size_start approved_by approved_at cluster_owners) %>
 <% else %>
   <% field_list = %w(id requestor created_at updated_at cluster_name database table ddl_statement jira_link final_insert
        table_rows_start table_size_start index_size_start table_rows_end table_size_end

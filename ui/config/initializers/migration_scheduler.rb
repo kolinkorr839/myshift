@@ -3,7 +3,7 @@ require 'rufus-scheduler'
 scheduler = Rufus::Scheduler.singleton
 
 # run migrations that have been started with a bulk action
-scheduler.every '15s' do
+scheduler.every '3s' do
   # select the oldest migration (by id) for each cluster that is queued up to start
   start_subquery = subquery = Migration.select('MIN(id) as id').
     where(:status => Migration.status_groups["enqueued"], :auto_run => 1).group(:cluster_name).to_sql
