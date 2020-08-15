@@ -19,7 +19,7 @@ RSpec.describe Form::NewMigrationRequest do
       cluster_name:        "appname-001",
       database:            "test",
       ddl_statement:       "ALTER TABLE users DROP COLUMN `c`",
-      pr_url:              "github.com/pr",
+      jira_link:              "github.com/pr",
       max_threads_running: "123",
       max_replication_lag: "5",
       config_path:         "/path/to/file",
@@ -65,15 +65,15 @@ RSpec.describe Form::NewMigrationRequest do
     end
 
     it 'validates presence of pr url' do
-      request = build(pr_url: nil)
+      request = build(jira_link: nil)
       expect(request.valid?).to eq(false)
-      expect(request).to have_error_on(:pr_url)
+      expect(request).to have_error_on(:jira_link)
     end
 
     it 'validates format of pr url' do
-      request = build(pr_url: "javascript:alert('hi')")
+      request = build(jira_link: "javascript:alert('hi')")
       expect(request.valid?).to eq(false)
-      expect(request).to have_error_on(:pr_url)
+      expect(request).to have_error_on(:jira_link)
     end
 
     it 'validates positive integerness of max threads running' do
@@ -105,7 +105,7 @@ RSpec.describe Form::NewMigrationRequest do
         cluster_name:         "appname-001",
         database:             "test",
         ddl_statement:        "ALTER TABLE users DROP COLUMN `c`",
-        pr_url:               "github.com/pr",
+        jira_link:               "github.com/pr",
         final_insert:         "INSERT INTO schema_migrations",
         requestor:            nil,
         meta_request_id:      nil,

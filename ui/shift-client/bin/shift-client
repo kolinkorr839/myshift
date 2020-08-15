@@ -53,12 +53,12 @@ class ShiftClientCLI
         raise "Must provide --cluster" unless options.cluster
         raise "Must provide --database" unless options.database
         raise "Must provide --ddl-statement" unless options.ddl_statement
-        raise "Must provide --pr-url" unless options.pr_url
+        raise "Must provide --pr-url" unless options.jira_link
         raise "Must provide --requestor" unless options.requestor
 
         client = shift_client_with_auth(options)
         display client.create_migration(options.cluster, options.database, options.ddl_statement,
-                                        options.pr_url, options.requestor, final_insert: options.final_insert,
+                                        options.jira_link, options.requestor, final_insert: options.final_insert,
                                         config_path: options.config_path, recursion_method: options.recursion_method)
       end
     end

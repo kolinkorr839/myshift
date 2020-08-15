@@ -20,7 +20,7 @@ RSpec.describe MigrationsController, type: :controller do
       :database      => 'test',
       :table         => 'users',
       :ddl_statement => 'ALTER TABLE users DROP COLUMN `c`',
-      :pr_url        => 'github.com/pr',
+      :jira_link     => 'github.com/pr',
       :final_insert  => 'INSERT INTO schema_migrations',
     }.merge(extra).with_indifferent_access
   end
@@ -258,9 +258,9 @@ RSpec.describe MigrationsController, type: :controller do
 
     context "with valid parameters" do
       it "sends valid params to the form" do
-        get :new, :pr_url => "github.com"
+        get :new, :jira_link => "github.com"
         expect(assigns(:migration)).to be_a(Form::NewMigrationRequest)
-        expect(assigns(:migration).pr_url).to eq("github.com")
+        expect(assigns(:migration).jira_link).to eq("github.com")
       end
     end
   end

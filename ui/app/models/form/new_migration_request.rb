@@ -20,7 +20,7 @@ module Form
         cluster_name: cluster_name,
         database: database,
         ddl_statement: ddl_statement,
-        pr_url: pr_url,
+        jira_link: jira_link,
         requestor: requestor,
         final_insert: final_insert,
         max_threads_running: max_threads_running,

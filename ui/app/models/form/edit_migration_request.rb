@@ -25,7 +25,7 @@ module Form
         cluster_name: cluster_name,
         database: database,
         ddl_statement: ddl_statement,
-        pr_url: pr_url,
+        jira_link: jira_link,
         requestor: requestor,
         final_insert: final_insert,
         status: 0,
@@ -52,7 +52,7 @@ module Form
     private
 
     def mutable?(attr)
-      %w(cluster_name database table ddl_statement pr_url requestor final_insert max_threads_running max_replication_lag config_path recursion_method).include?(attr)
+      %w(cluster_name database table ddl_statement jira_link requestor final_insert max_threads_running max_replication_lag config_path recursion_method).include?(attr)
     end
   end
 end

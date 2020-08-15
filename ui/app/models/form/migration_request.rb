@@ -58,12 +58,12 @@ module Form
     validates_presence_of :cluster_name
     validates_presence_of :database
     validates_presence_of :ddl_statement
-    validates_presence_of :pr_url
+    validates_presence_of :jira_link
     validates_numericality_of :max_threads_running, greater_than: 0
     validates_numericality_of :max_replication_lag, greater_than: 0
     # don't allow semicolons anywhere
     validates_format_of :database, :with => /\A[^;]+\Z/
-    validates_format_of :pr_url, :with => /\A^(?!javascript:).+\Z/ # XSS
+    validates_format_of :jira_link, :with => /\A^(?!javascript:).+\Z/ # XSS
 
     validates_with SQLValidator, fields: [:ddl_statement]
     validates_format_of :final_insert, :with => /\A(?i)(INSERT\s+INTO\s+)[^;]+\Z/i, :allow_blank => true
@@ -84,7 +84,7 @@ module Form
       :database,
       :table,
       :ddl_statement,
-      :pr_url,
+      :jira_link,
       :max_threads_running,
       :max_replication_lag,
       :config_path,

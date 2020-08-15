@@ -525,20 +525,20 @@ RSpec.describe Api::V1::MigrationsController, type: :controller do
       it 'creates a new migration' do
         expect{
           post :create, cluster_name: @cluster.name, database: "db1", ddl_statement: "alter table users add column c int",
-               pr_url: "github.com/pr", requestor: "mfinch", final_insert: nil
+               jira_link: "github.com/pr", requestor: "mfinch", final_insert: nil
         }.to change(Migration, :count).by(1)
       end
 
       it 'returns migration as json' do
         allow_any_instance_of(Migration).to receive(:parsed).and_return({:run => :maybeshort})
         post :create, cluster_name: @cluster.name, database: "db1", ddl_statement: "alter table users add column c int",
-             pr_url: "github.com/pr", requestor: "mfinch", final_insert: nil
+             jira_link: "github.com/pr", requestor: "mfinch", final_insert: nil
         expect(json["migration"]["database"]).to eq("db1")
       end
 
       it 'returns a 200 status code' do
         post :create, cluster_name: @cluster.name, database: "db1", ddl_statement: "alter table users add column c int",
-             pr_url: "github.com/pr", requestor: "mfinch", final_insert: nil
+             jira_link: "github.com/pr", requestor: "mfinch", final_insert: nil
         expect(response).to have_http_status(200)
       end
     end
@@ -547,20 +547,20 @@ RSpec.describe Api::V1::MigrationsController, type: :controller do
       it 'does not save a new migration' do
         expect{
           post :create, cluster_name: nil, database: "db1", ddl_statement: "alter table users add column c int",
-               pr_url: "github.com/pr", requestor: "mfinch", final_insert: nil
+               jira_link: "github.com/pr", requestor: "mfinch", final_insert: nil
           }.to_not change(Migration, :count)
       end
 
       it 'returns an error message as json' do
         post :create, cluster_name: nil, database: "db1", ddl_statement: "alter table users add column c int",
-             pr_url: "github.com/pr", requestor: "mfinch", final_insert: nil
+             jira_link: "github.com/pr", requestor: "mfinch", final_insert: nil
         expect(json["errors"]).to eq(["Cluster name can't be blank.", "Cluster name is not included in the list.",
                                       "DDL statement is invalid (error: table does not exist!)."])
       end
 
       it 'returns a 400 status code' do
         post :create, cluster_name: nil, database: "db1", ddl_statement: "alter table users add column c int",
-             pr_url: "github.com/pr", requestor: "mfinch", final_insert: nil
+             jira_link: "github.com/pr", requestor: "mfinch", final_insert: nil
         expect(response).to have_http_status(400)
       end
     end

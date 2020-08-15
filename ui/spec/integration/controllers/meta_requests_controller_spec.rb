@@ -18,7 +18,7 @@ RSpec.describe MetaRequestsController, type: :controller do
       :clusters      => ["appname-001"],
       :databases     => ["appname-001:test", "appname-001:db1"],
       :ddl_statement => 'ALTER TABLE users DROP COLUMN `c`',
-      :pr_url        => 'github.com/pr',
+      :jira_link     => 'github.com/pr',
       :final_insert  => 'INSERT INTO schema_migrations',
       :max_threads_running => "123",
       :max_replication_lag => "5",
@@ -109,14 +109,14 @@ RSpec.describe MetaRequestsController, type: :controller do
       it 'populates a saved_state hash' do
         get :new, {
           :ddl_statement => "alter table", :final_insert => "insert into",
-          :pr_url => "github.com", :databases => ["cluster-001:db1", "cluster-001:db2"],
+          :jira_link => "github.com", :databases => ["cluster-001:db1", "cluster-001:db2"],
           :max_threads_running => "123", :max_replication_lag => "5", :config_path => "/path/to/file",
           :recursion_method => "some string",
         }
         expect(assigns(:saved_state)).to eq({
           :ddl_statement       => "alter table",
           :final_insert        => "insert into",
-          :pr_url              => "github.com",
+          :jira_link           => "github.com",
           :cluster_dbs         => {
             "cluster-001"      => ["db1", "db2"]
           },
@@ -321,7 +321,7 @@ RSpec.describe MetaRequestsController, type: :controller do
         expected = {
           :ddl_statement       => valid_attributes[:ddl_statement],
           :final_insert        => valid_attributes[:final_insert],
-          :pr_url              => valid_attributes[:pr_url],
+          :jira_link           => valid_attributes[:jira_link],
           :cluster_dbs         => {"appname-001" => ["test"], "otherapp-001" => ["test"]},
           :max_threads_running => "123",
           :max_replication_lag => "5",
@@ -370,7 +370,7 @@ RSpec.describe MetaRequestsController, type: :controller do
         expected = {
           :ddl_statement       => valid_attributes[:ddl_statement],
           :final_insert        => valid_attributes[:final_insert],
-          :pr_url              => valid_attributes[:pr_url],
+          :jira_link           => valid_attributes[:jira_link],
           :cluster_dbs         => {"appname-001" => []},
           :max_threads_running => "123",
           :max_replication_lag => "5",
@@ -418,7 +418,7 @@ RSpec.describe MetaRequestsController, type: :controller do
         expected = {
           :ddl_statement       => "blah",
           :final_insert        => valid_attributes[:final_insert],
-          :pr_url              => valid_attributes[:pr_url],
+          :jira_link           => valid_attributes[:jira_link],
           :cluster_dbs         => {"appname-001" => ["test", "db1"]},
           :max_threads_running => "123",
           :max_replication_lag => "5",
@@ -454,7 +454,7 @@ RSpec.describe MetaRequestsController, type: :controller do
       expected = {
         :ddl_statement       => @meta_request.ddl_statement,
         :final_insert        => @meta_request.final_insert,
-        :pr_url              => @meta_request.pr_url,
+        :jira_link           => @meta_request.jira_link,
         :max_threads_running => @meta_request.max_threads_running,
         :max_replication_lag => @meta_request.max_replication_lag,
         :config_path         => @meta_request.config_path,
@@ -472,7 +472,7 @@ RSpec.describe MetaRequestsController, type: :controller do
 
     context 'success path' do
       it 'updates the meta request' do
-        patch :update, id: @meta_request, ddl_statement: "do something else", pr_url: "github.com/pr2"
+        patch :update, id: @meta_request, ddl_statement: "do something else", jira_link: "github.com/pr2"
         @meta_request.reload
         expect(@meta_request.ddl_statement).to eq('do something else')
       end
@@ -483,7 +483,7 @@ RSpec.describe MetaRequestsController, type: :controller do
         mig2 = FactoryGirl.create(:pending_migration, ddl_statement: @meta_request.ddl_statement,
                                   meta_request_id: @meta_request.id, cluster_name: @cluster.name)
         new_ddl = "create table a like b"
-        patch :update, id: @meta_request, ddl_statement: new_ddl, pr_url: "github.com/pr2"
+        patch :update, id: @meta_request, ddl_statement: new_ddl, jira_link: "github.com/pr2"
         mig1.reload; mig2.reload; @meta_request.reload
         expect(mig1.ddl_statement).to eq(new_ddl)
         expect(mig2.ddl_statement).to eq(new_ddl)
@@ -492,7 +492,7 @@ RSpec.describe MetaRequestsController, type: :controller do
       end
 
       it 'redirects to the meta_request' do
-        patch :update, id: @meta_request, ddl_statement: "do something else", pr_url: "github.com/pr2"
+        patch :update, id: @meta_request, ddl_statement: "do something else", jira_link: "github.com/pr2"
         expect(response).to redirect_to(@meta_request)
       end
     end
@@ -504,7 +504,7 @@ RSpec.describe MetaRequestsController, type: :controller do
         mig2 = FactoryGirl.create(:pending_migration, ddl_statement: @meta_request.ddl_statement,
                                   meta_request_id: @meta_request.id, cluster_name: @cluster.name)
         starting_ddl = @meta_request.ddl_statement
-        patch :update, id: @meta_request, ddl_statement: "create table a like b", pr_url: "github.com/pr2"
+        patch :update, id: @meta_request, ddl_statement: "create table a like b", jira_link: "github.com/pr2"
         mig1.reload; mig2.reload; @meta_request.reload
         expect(mig1.ddl_statement).to eq(starting_ddl)
         expect(mig2.ddl_statement).to eq(starting_ddl)
@@ -518,7 +518,7 @@ RSpec.describe MetaRequestsController, type: :controller do
         mig2 = FactoryGirl.create(:pending_migration, ddl_statement: @meta_request.ddl_statement,
                                   meta_request_id: @meta_request.id, cluster_name: @cluster.name)
         starting_ddl = @meta_request.ddl_statement
-        patch :update, id: @meta_request, ddl_statement: "create table a like b", pr_url: "github.com/pr2"
+        patch :update, id: @meta_request, ddl_statement: "create table a like b", jira_link: "github.com/pr2"
         mig1.reload; mig2.reload; @meta_request.reload
         expect(mig1.ddl_statement).to eq(starting_ddl)
         expect(mig2.ddl_statement).to eq(starting_ddl)
@@ -530,7 +530,7 @@ RSpec.describe MetaRequestsController, type: :controller do
         expected = {
           :ddl_statement       => nil,
           :final_insert        => nil,
-          :pr_url              => "github.com/pr",
+          :jira_link              => "github.com/pr",
           :max_threads_running => "200",
           :max_replication_lag => "1",
           :config_path         => nil,

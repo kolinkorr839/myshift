@@ -6,7 +6,7 @@ class MetaRequest < ActiveRecord::Base
   attr_accessor :max_threads_running, :max_replication_lag, :config_path, :recursion_method
 
   validates_presence_of :ddl_statement
-  validates_presence_of :pr_url
+  validates_presence_of :jira_link
   validates_format_of :final_insert, :with => /\A(?i)(INSERT\s+INTO\s+)[^;]+\Z/i, :allow_blank => true
 
   private

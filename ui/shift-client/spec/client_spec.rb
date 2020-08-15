@@ -10,7 +10,7 @@ describe ShiftClient do
   let(:cluster) { "cluster-001" }
   let(:database) { "db_01" }
   let(:ddl_statement) { "alter table slug" }
-  let(:pr_url) { "github.com/pr" }
+  let(:jira_link) { "github.com/pr" }
   let(:requestor) { "michael" }
   let(:final_insert) { "" }
   let(:config_path) { "" }
@@ -33,7 +33,7 @@ describe ShiftClient do
       :cluster_name     => cluster,
       :database         => database,
       :ddl_statement    => ddl_statement,
-      :pr_url           => pr_url,
+      :jira_link        => jira_link,
       :requestor        => requestor,
       :final_insert     => final_insert,
       :config_path      => config_path,
@@ -42,7 +42,7 @@ describe ShiftClient do
     resource_double = instance_double(RestClient::Resource)
     expect(RestClient::Resource).to receive(:new).with(path, {}).and_return(resource_double)
     expect(resource_double).to receive(:post).with(params.to_json, post_headers).and_return("{}")
-    expect(shift_client.create_migration(cluster, database, ddl_statement, pr_url, requestor)).to eq({})
+    expect(shift_client.create_migration(cluster, database, ddl_statement, jira_link, requestor)).to eq({})
   end
 
   it "#generic_migration_action_post" do

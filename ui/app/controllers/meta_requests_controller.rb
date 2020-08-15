@@ -150,7 +150,7 @@ class MetaRequestsController < ApplicationController
     @saved_state = {
       :ddl_statement       => params[:ddl_statement],
       :final_insert        => params[:final_insert],
-      :pr_url              => params[:pr_url],
+      :jira_link           => params[:jira_link],
       :max_threads_running => max_threads_running,
       :max_replication_lag => max_replication_lag,
       :config_path         => config_path,
@@ -164,7 +164,7 @@ class MetaRequestsController < ApplicationController
   def create
     ddl_statement = params[:ddl_statement]
     final_insert = params[:final_insert]
-    pr_url = params[:pr_url]
+    jira_link = params[:jira_link]
     databases = params[:databases]
     clusters = params[:clusters]
     max_threads_running = params[:max_threads_running]
@@ -210,7 +210,7 @@ class MetaRequestsController < ApplicationController
           "cluster_name"        => cluster_name,
           "database"            => database,
           "ddl_statement"       => ddl_statement,
-          "pr_url"              => pr_url,
+          "jira_link"           => jira_link,
           "requestor"           => current_user_name,
           "final_insert"        => final_insert,
           "max_threads_running" => max_threads_running,
@@ -230,7 +230,7 @@ class MetaRequestsController < ApplicationController
         mr = MetaRequest.new({
           :ddl_statement       => ddl_statement,
           :final_insert        => final_insert,
-          :pr_url              => pr_url,
+          :jira_link           => jira_link,
           :requestor           => current_user_name,
           :max_threads_running => max_threads_running,
           :max_replication_lag => max_replication_lag,
@@ -271,7 +271,7 @@ class MetaRequestsController < ApplicationController
     @saved_state = {
       :ddl_statement       => ddl_statement,
       :final_insert        => final_insert,
-      :pr_url              => pr_url,
+      :jira_link           => jira_link,
       :max_threads_running => max_threads_running,
       :max_replication_lag => max_replication_lag,
       :config_path         => config_path,
@@ -297,7 +297,7 @@ class MetaRequestsController < ApplicationController
     @saved_state = {
       :ddl_statement       => @meta_request.ddl_statement,
       :final_insert        => @meta_request.final_insert,
-      :pr_url              => @meta_request.pr_url,
+      :jira_link           => @meta_request.jira_link,
       :max_threads_running => max_threads_running,
       :max_replication_lag => max_replication_lag,
       :config_path         => @meta_request.config_path,
@@ -307,7 +307,7 @@ class MetaRequestsController < ApplicationController
 
   def update
     @errors = []
-    updatable = ["ddl_statement", "pr_url", "final_insert", "max_threads_running", "max_replication_lag",
+    updatable = ["ddl_statement", "jira_link", "final_insert", "max_threads_running", "max_replication_lag",
       "config_path", "recursion_method", "requestor"]
     updated = {}
     ActiveRecord::Base.transaction do
@@ -370,7 +370,7 @@ class MetaRequestsController < ApplicationController
     @saved_state = {
       :ddl_statement       => updated["ddl_statement"],
       :final_insert        => updated["final_insert"],
-      :pr_url              => updated["pr_url"],
+      :jira_link           => updated["jira_link"],
       :max_threads_running => updated["max_threads_running"],
       :max_replication_lag => updated["max_replication_lag"],
       :config_path         => updated["config_path"],

@@ -16,7 +16,7 @@ RSpec.describe Form::EditMigrationRequest do
       described_class.new(dao, extra.with_indifferent_access)
   end
 
-  it 'allows the pr_url to be updated' do
-      expect(build(pr_url: 'foo.com').pr_url).to eq('foo.com')
+  it 'allows the jira_link to be updated' do
+      expect(build(jira_link: 'foo.com').jira_link).to eq('foo.com')
   end
 end

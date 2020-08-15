@@ -95,7 +95,7 @@ class MigrationsController < ApplicationController
     @migration = Form::NewMigrationRequest.new
 
     # the below params are set when you "clone" a migration
-    valid_attributes = [:cluster_name, :database, :ddl_statement, :pr_url, :final_insert, :max_threads_running, :max_replication_lag,
+    valid_attributes = [:cluster_name, :database, :ddl_statement, :jira_link, :final_insert, :max_threads_running, :max_replication_lag,
                         :config_path, :recursion_method]
     valid_attributes.each do |attr|
       if params.has_key?(attr.to_s)

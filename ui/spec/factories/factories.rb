@@ -26,7 +26,7 @@ FactoryGirl.define do
     cluster_name "appname-001"
     database "testdb"
     ddl_statement "alter table test_table drop column c1"
-    pr_url "github.com/pr"
+    jira_link "github.com/pr"
     requestor "developer"
     max_threads_running "200"
     max_replication_lag "1"
@@ -38,7 +38,7 @@ FactoryGirl.define do
       n
     end
     ddl_statement "alter table test_table drop column c1"
-    pr_url "github.com/pr"
+    jira_link "github.com/pr"
     final_insert nil
     requestor "developer"
     max_threads_running "200"

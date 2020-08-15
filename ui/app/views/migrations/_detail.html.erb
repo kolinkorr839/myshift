@@ -7,7 +7,7 @@
       <%= link_to "Edit", edit_migration_path(@migration), class: 'btn btn-primary' %>
     <% end %>
     <%= link_to "Clone", new_migration_path(:cluster_name => @migration.cluster_name, :database => @migration.database,
-                                            :ddl_statement => @migration.ddl_statement, :pr_url => @migration.pr_url,
+                                            :ddl_statement => @migration.ddl_statement, :jira_link => @migration.jira_link,
                                             :final_insert => @migration.final_insert, :max_threads_running => @migration.max_threads_running,
                                             :max_replication_lag => @migration.max_replication_lag, :config_path => @migration.config_path,
                                             :recursion_method => @migration.recursion_method), class: 'btn btn-default' %>
@@ -52,13 +52,13 @@
 <hr>
 
 <% if action_type == :create %>
-  <% field_list = %w(id meta_request_id requestor created_at updated_at cluster_name database table ddl_statement pr_url final_insert
+  <% field_list = %w(id meta_request_id requestor created_at updated_at cluster_name database table ddl_statement jira_link final_insert
        approved_by approved_at cluster_owners) %>
 <% elsif action_type == :drop %>
-  <% field_list = %w(id meta_request_id requestor created_at updated_at cluster_name database table ddl_statement pr_url final_insert
+  <% field_list = %w(id meta_request_id requestor created_at updated_at cluster_name database table ddl_statement jira_link final_insert
        table_rows_start table_size_start index_size_start approved_by approved_at cluster_owners) %>
 <% else %>
-  <% field_list = %w(id meta_request_id requestor created_at updated_at cluster_name database table ddl_statement pr_url final_insert
+  <% field_list = %w(id meta_request_id requestor created_at updated_at cluster_name database table ddl_statement jira_link final_insert
        table_rows_start table_size_start index_size_start table_rows_end table_size_end
        index_size_end approved_by approved_at cluster_owners) %>
 <% end %>
@@ -77,8 +77,8 @@
       <% if @migration.meta_request_id %>
         <div class="col-md-6"><%= link_to @migration.meta_request_id, "/meta_requests/" + @migration.meta_request_id.to_s %></div>
       <% end %>
-    <% elsif field == "pr_url" %>
-      <div class="col-md-6 wrap-text"><%= sanitize link_to @migration.pr_url, @migration.pr_url %></div>
+    <% elsif field == "jira_link" %>
+      <div class="col-md-6 wrap-text"><%= sanitize link_to @migration.jira_link, @migration.jira_link %></div>
     <% elsif %w(table_size_start index_size_start table_size_end index_size_end).include?(field) %>
       <div class="col-md-6"><%= number_to_human_size(@migration[field]) %></div>
     <% elsif %w(table_rows_start table_rows_end).include?(field) %>
