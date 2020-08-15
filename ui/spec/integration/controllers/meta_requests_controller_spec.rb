@@ -530,7 +530,7 @@ RSpec.describe MetaRequestsController, type: :controller do
         expected = {
           :ddl_statement       => nil,
           :final_insert        => nil,
-          :jira_link              => "github.com/pr",
+          :jira_link           => "github.com/pr",
           :max_threads_running => "200",
           :max_replication_lag => "1",
           :config_path         => nil,
