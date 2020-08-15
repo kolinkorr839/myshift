@@ -67,4 +67,7 @@ Rails.application.configure do
   ## ptosc
   # root path for pt-osc output logs. specified within shift-runner
   config.x.ptosc.log_dir = "/tmp/shift/"
+
+  # Suppress output to log files
+  config.logger = ActiveSupport::Logger.new(nil)
 end

@@ -1,8 +1,4 @@
 <h2><%= @migration.persisted? ? "Edit" : "New" %> Migration Request</h2>
-<center>
-  <span class="new-bubble">new</span>
-  need to run a migration on multiple shards? <a href="/meta_requests/new">click here</a>
-</center>
 
 <div class="col-md-10 col-md-offset-1" id="form-table">
   <div class="row">
@@ -125,7 +121,7 @@
           <div class="form-group">
             <div class="col-md-4">
               <%= f.label :max_threads_running, 'max threads running', class: 'control-label', rows: 2%>
-              <span class="help-block">The gh-ost will abort if threads running reaches this value. Default: 200 threads</span>
+              <span class="help-block">Gh-ost will abort if threads running reaches this value. Default: 200 threads</span>
             </div>
             <div class="col-md-offset-1 col-md-3">
               <%= f.number_field :max_threads_running, class: 'form-control' %>
@@ -136,7 +132,7 @@
           <div class="form-group">
             <div class="col-md-4">
               <%= f.label :max_replication_lag, 'max replication lag', class: 'control-label', rows: 2%>
-              <span class="help-block">The OSC will pause until every replica's lag is less than this value. Default: 1 second</span>
+              <span class="help-block">Gh-ost will pause until every replica's lag is less than this value. Default: 1 second</span>
             </div>
             <div class="col-md-offset-1 col-md-3">
               <%= f.number_field :max_replication_lag, class: 'form-control' %>
