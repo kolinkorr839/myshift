@@ -28,8 +28,8 @@
               <ul class="nav navbar-nav navbar-right">
                 <li class="<%= 'active' if params[:action] == "index" && params[:controller] == "migrations" %>"><%= link_to 'All Requests', root_url %></li>
                 <li class="<%= 'active' if params[:action] == "new" %>"><%= link_to 'Create Request', new_migration_path %></li>
-                <li class="<%= 'active' if params[:action] == "index" %>"><%= link_to 'Sign In', new_user_session_path %></li>
-                <li class="<%= 'active' if params[:action] == "index" %>"><%= link_to 'Sign Out', destroy_user_session_path, method: :delete %></li>
+                <li class="<%= 'active' if params[:action] == "meta" %>"><%= link_to 'Sign In', new_user_session_path %></li>
+                <li class="<%= 'active' if params[:action] == "meta" %>"><%= link_to 'Sign Out', destroy_user_session_path, method: :delete %></li>
                 <% if user_is_admin? %>
                 <li class="<%= 'active' if params[:action] == "index" && params[:controller] == "admin" %>"><%= link_to 'Admin Panel', admin_index_path %></li>
                 <% end %>
