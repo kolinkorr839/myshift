@@ -3,22 +3,39 @@ class ApplicationController < ActionController::Base
   include Pundit
 
   protect_from_forgery
-  before_filter :current_user
+  before_filter :authenticate_user!
+  before_filter :new_current_user
+  # before_filter :current_user
 
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 
   private
 
-  # TODO: hook this up with your own authentication system
-  def current_user
-    @current_user = {
-      :username => "admin",
-      :capabilities => ["admin"],
+  def new_current_user
+    if current_user && current_user.admin?
+        @my_user = "sre"
+        @my_role = ["admin"]
+    else
+        @my_user = "dev"
+        @my_role = ["dev"]
+    end
+
+    @new_current_user = {
+      :username => @my_user,
+      :capabilities => @my_role,
     }
   end
 
+  # TODO: hook this up with your own authentication system
+#   def current_user
+#     @current_user = {
+#       :username => "admin",
+#       :capabilities => ["admin"],
+#     }
+#   end
+
   def current_user_name
-    @current_user[:username]
+    @new_current_user[:username]
   end
   helper_method :current_user_name
 
@@ -31,7 +48,8 @@ class ApplicationController < ActionController::Base
   end
 
   def user_is_admin?
-    (current_user[:capabilities].include? 'admin') || Rails.env.development?
+    # (current_user[:capabilities].include? 'admin') || Rails.env.development?
+    (new_current_user[:capabilities].include? 'admin')
   end
   helper_method :user_is_admin?
 

@@ -17,7 +17,8 @@ class MigrationPolicy
 
   # applies to start, pause, rename, resume, dequeue, and cancel
   def run_action?
-    admin? || cluster_owner?
+    # admin? || cluster_owner?
+    true
   end
 
   # applues to any action
@@ -33,7 +34,9 @@ class MigrationPolicy
   private
 
   def admin?
-    (@user[:capabilities].include? 'admin') || Rails.env.development?
+    # (@user[:capabilities].include? 'admin') || Rails.env.development?
+    # (@user[:capabilities].include? 'admin')
+    @user.admin?
   end
 
   def approver?

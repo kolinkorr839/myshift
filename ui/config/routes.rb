@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  devise_for :users
   get 'migrations/index'
 
   get '/_status', to: 'health#status'

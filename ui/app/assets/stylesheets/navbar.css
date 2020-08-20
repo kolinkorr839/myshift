@@ -185,6 +185,7 @@
     padding-top: 27px;
     padding-bottom: 27px;
   }
+
   .navbar-nav.navbar-right:last-child {
     margin-right: -15px;
   }
@@ -394,7 +395,7 @@
   background-color: transparent;
 }
 .navbar-inverse .navbar-text {
-  color: #999;
+  color: #34eb49;
 }
 .navbar-inverse .navbar-nav > li > a {
   color: #9da2a6;

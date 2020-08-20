@@ -54,6 +54,6 @@ def login(admin: false)
   else
     user = {:username=>"developer", :email=>"developer@shift.com", :capabilities=>[], :applications=>[], :groups=>[]}
   end
-  allow_any_instance_of(ApplicationController).to receive(:current_user) { user }
+  allow_any_instance_of(ApplicationController).to receive(:new_current_user) { user }
   allow_any_instance_of(ApplicationController).to receive(:current_user_name) { user[:username] }
 end
