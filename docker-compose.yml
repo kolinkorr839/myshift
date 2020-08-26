@@ -1,0 +1,26 @@
+version: '3'
+
+services:
+  db:
+    image: mysql:5.7
+    volumes:
+      - /tmp/shift-db:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=shift_development
+      - MYSQL_USER=root
+      - MYSQL_PASSWORD=root
+  shift:
+    build:
+      context: .
+    ports:
+      - "9195:9195"
+    environment:
+#      - DATABASE_URL=mysql2://root:root@shift_development/shift?pool=30&timeout=5000
+      - SECRET_KEY_BASE=some_random_30_char_string
+      - DB_BLACKLIST=information_schema,mysql,performance_schema,_pending_drops,common_schema,sys
+      - UI_ADMINS=cadl
+      - UI_MYSQL_USER=root
+      - UI_MYSQL_PASSWORD=root
+      - RUNNER_MYSQL_USER=root
+      - RUNNER_MYSQL_PASSWORD=root

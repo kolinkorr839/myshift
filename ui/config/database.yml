@@ -1,9 +1,10 @@
 common: &common
   adapter: <%= defined?(JRUBY_VERSION) ? 'jdbcmysql' : 'mysql2' %>
-  host:     127.0.0.1
+  host:     shift_db_1
   pool:     30
   timeout:  5000
   username: root
+  password: root
 
 test:
   <<: *common

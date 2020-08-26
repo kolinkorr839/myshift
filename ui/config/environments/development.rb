@@ -53,6 +53,7 @@ Rails.application.configure do
   # read-only credentials for shift to connect to and inspect all hosts
   config.x.mysql_helper.db_config = {
     :username => "root",
+    :password => "root",
   }
   # databases to exclude running oscs on
   config.x.mysql_helper.db_blacklist =

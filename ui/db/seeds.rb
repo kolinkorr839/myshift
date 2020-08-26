@@ -19,4 +19,8 @@ Statuses.create(status: 14, description: 'enqueued', action: 'dequeue', label: '
 if Rails.env == "development"
   Cluster.create(name: "default-cluster-001", app: "local-app", rw_host: "localhost",
                  port: 3306, admin_review_required: false, is_staging: true)
+
+  User.create(email: "admin@test.com", encrypted_password: "$2a$12$u4PDX3nTLDld4zpDcqhP0ei4XOkzmWqAGq5UCbqJqMiIsEL/4yOwe", created_at: "2020-08-26 20:11:47", updated_at: "2020-08-26 20:11:47", role: "admin");
+  User.create(email: "dev@test.com", encrypted_password: "$2a$12$C.OeVwlWapY37dKv5.3GIe3snGbaMi9Cadm8bCt3CURD5w2knjLGu", created_at: "2020-08-26 20:11:47", updated_at: "2020-08-26 20:11:47", role: "dev");
+
 end
