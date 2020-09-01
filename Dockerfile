@@ -13,16 +13,8 @@ FROM ruby:2.3
 # install deps
 RUN apt-get update && apt-get install -y --no-install-recommends \
     build-essential \
-    cpanminus \
-    libdbd-mysql-perl \
-    libdbi-perl \
     libgmp3-dev \
-    libio-socket-ssl-perl \
-    libterm-readkey-perl \
-    libyaml-perl \
     lsb-core \
-    patch \
-    perl \
     ruby-dev \
     supervisor
 
@@ -50,7 +42,4 @@ COPY docker-entrypoint.sh /opt/code/
 WORKDIR /opt/code
 # EXPOSE 9195 
 ENTRYPOINT ["/opt/code/docker-entrypoint.sh"]
-CMD ["supervisord", "-n"]
-
-# TODO:
-# patch ui/app/controllers/application_controller.rb to support cert-based account system
+# CMD ["supervisord", "-n"]
