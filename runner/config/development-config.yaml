@@ -7,7 +7,7 @@ mysql_rootCA:
 mysql_defaults_file: config/my_development.cnf
 
 # config for the rest client
-rest_api: http://0.0.0.0:9189/api/v1/
+rest_api: http://shift_shift_1:9195/api/v1/
 rest_cert:
 rest_key:
 

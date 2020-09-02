@@ -928,17 +928,17 @@ func (runner *runner) generatePtOscCommand(currentMigration *migration.Migration
 
 	dsn := fmt.Sprintf("D=%s,t=%s", currentMigration.Database, currentMigration.Table)
 	commandOptions = make([]string, 0)
-    ghostOptions := append(commandOptions,
-        "--user="+runner.MysqlUser,
-        "--password="+runner.MysqlPassword,
-        "--database="+currentMigration.Database,
-        "--table="+currentMigration.Table,
-        "--alter="+alterStatement,
-        "--verbose",
-        "--allow-on-master",
-        "--initially-drop-old-table",
-        "--initially-drop-ghost-table",
-        "--switch-to-rbr")
+        ghostOptions := append(commandOptions,
+            "--user="+runner.MysqlUser,
+            "--password="+runner.MysqlPassword,
+            "--database="+currentMigration.Database,
+            "--table="+currentMigration.Table,
+            "--alter="+alterStatement,
+            "--verbose",
+            "--allow-on-master",
+            "--initially-drop-old-table",
+            "--initially-drop-ghost-table",
+            "--switch-to-rbr")
 
 	if currentMigration.Status == migration.PrepMigrationStatus {
         commandOptions = ghostOptions

@@ -29,6 +29,9 @@ RUN cd /opt/code/ui \
     && bundle install
 COPY ui /opt/code/ui
 
+# Copy runner config
+COPY runner/config /opt/code/runner/config/
+
 # copy runner executable
 COPY --from=builder /go/src/github.com/square/shift/runner/runner /opt/code/runner/
 
