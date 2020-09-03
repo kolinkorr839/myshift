@@ -12,7 +12,7 @@ stdout_logfile_maxbytes=0
 redirect_stderr=true
 
 [program:shift-runner]
-command=/opt/code/runner/runner
+command=/opt/code/runner/runner -logtostderr
 directory=/opt/code/runner/
 autostart=true
 stdout_logfile=/dev/stdout
@@ -20,9 +20,9 @@ stdout_logfile_maxbytes=0
 redirect_stderr=true
 " > /etc/supervisor/conf.d/shift.conf
 
-export ENVIRONMENT="development"
+# export ENVIRONMENT="development"
+# export RAILS_ENV="development"
 export PATH="/usr/local/bin:/usr/local/bundle/bin:$PATH"
-export RAILS_ENV="development"
 export RAILS_SERVE_STATIC_FILES=1
 
 supervisord -n

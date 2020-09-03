@@ -929,6 +929,7 @@ func (runner *runner) generatePtOscCommand(currentMigration *migration.Migration
 	dsn := fmt.Sprintf("D=%s,t=%s", currentMigration.Database, currentMigration.Table)
 	commandOptions = make([]string, 0)
         ghostOptions := append(commandOptions,
+            "--host="+currentMigration.Host,
             "--user="+runner.MysqlUser,
             "--password="+runner.MysqlPassword,
             "--database="+currentMigration.Database,

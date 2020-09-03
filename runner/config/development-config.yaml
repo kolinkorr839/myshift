@@ -1,6 +1,6 @@
 # config for the database client
 mysql_user: root
-mysql_password:
+mysql_password: root
 mysql_cert:
 mysql_key:
 mysql_rootCA:
